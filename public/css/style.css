@@ -18,8 +18,6 @@ body {
 
 ul, li {
   list-style-type: none;
-  padding: 0;
-  margin: 0;
 }
 
 a {
@@ -33,9 +31,23 @@ a:hover {
   transition: all 0.3s ease;
 }
 
-
-h1, h2, h3, h4, h5, h6, p {
-  margin: 0;
+.img-berita{
+  float: left;
+  margin-right: 40px;
+}
+.table-body {
+  padding: 20px;
+  margin: 0 auto;
+}
+.list-berita p{
+  width: 100%;
+}
+.main{
+  width:1000px;
+  margin: 0 auto;
+}
+.clear{
+  clear: both;
 }
 
 h1 {
@@ -147,17 +159,20 @@ header {
 }
 
 .container-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 12px;
+  margin-bottom: 42px;
 }
-
+.top{
+  display: inline-block;
+  margin-top: 40px;
+  margin-left: 65%;
+}
 .container-header .new-button {
   background: #80bcff;
   border-radius: 30px;
   font-size: 14px;
   width: 120px;
+  float: left;
+  margin-right: 20px;
   height: 45px;
   line-height: 43px;
   text-align: center;
@@ -207,14 +222,6 @@ header {
   background-color: #ffffff;
 }
 
-.table-body li {
-  height: 72px;
-  border: 1px solid #f0f4f9;
-  border-top: none;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
 
 .table-body .id-column {
   font-size: 16px;
@@ -283,7 +290,7 @@ header {
   color: #8491a5;
 }
 
-.item-form-wrapper input[type="text"] {
+.item-form-wrapper input[type="text"], textarea {
   width: 100%;
   height: 40px;
   margin-top: 8px;

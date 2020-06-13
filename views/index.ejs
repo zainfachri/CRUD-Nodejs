@@ -2,41 +2,40 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>LIST</title>
+    <title>BERITA</title>
     <link rel="stylesheet" href="/css/style.css">
     <script src="/send_url.js"></script>
   </head>
   <body>
     <header>
-      <a href="/" class="header-logo">LIST</a>
+      <a href="/" class="header-logo">ME-DUMB</a>
     </header>
-    <div class="container">
+    <div class="top">
       <div class="container-header">
-        <h1>Daftar Belanjaan</h1>
-        <a href="/new" class="new-button">+ Tambahkan</a>
+        <a href="/berita" class="new-button">Add Berita</a>
+        <a href="/user" class="new-button">Add User</a>
       </div>
-      <div class="index-table-wrapper">
-        <div class="table-head">
-          <span class="id-column">ID</span>
-          <span>Item</span>
-        </div>
+    </div>
+    <div class="main">
         <ul class="table-body">
-          <% items.forEach((item) => { %>
-            <li>
-              <div class="item-data">
-                <span class="id-column"><%= item.id %></span>
-                <span class="name-column"><%= item.name %></span>
+          <% news.forEach((item) => { %>
+            <li class="list-berita">
+              <div class="img-berita">
+                <img src="/images/<%= item.image %>" alt="img" width="250px" height="200px">
               </div>
-              <div class="item-menu">
+              <h3><%= item.title %></h3>
+              <p><%= item.deskripsi %></p>
+              
+              <div class="item-menu ">
                 <form action="/delete/<%= item.id %>" method="post">
                   <input type="submit" value="Hapus">
                 </form>
                 <a href="/edit/<%= item.id %>">Edit</a>
               </div>
+              <div class="clear"></div>
             </li>
           <% }) %>
         </ul>
       </div>
-    </div>
   </body>
 </html>

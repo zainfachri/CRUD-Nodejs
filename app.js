@@ -9,49 +9,68 @@ const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: '',
-  database: 'progatedb'
+  database: 'me-dumb'
 });
 
 app.get('/', (req, res) => {
-  res.render('top.ejs');
-});
-
-app.get('/index', (req, res) => {
   connection.query(
-    'SELECT * FROM items',
+    'SELECT * FROM news',
     (error, results) => {
-      res.render('index.ejs', {items: results});
+      res.render('index.ejs', {news: results});
     }
   );
 });
 
-app.get('/new', (req, res) => {
-  res.render('new.ejs');
+app.get('/index', (req, res) => {
+  connection.query(
+    'SELECT * FROM news',
+    (error, results) => {
+      res.render('index.ejs', {news: results});
+    }
+  );
 });
+
+app.get('/berita', (req, res) => {
+  res.render('berita.ejs');
+});
+app.get('/user', (req, res) => {
+  res.render('user.ejs');
+});
+
 
 app.post('/create', (req, res) => {
   connection.query(
-    'INSERT INTO items (name) VALUES (?)',
-    [req.body.itemName],
+    'INSERT INTO news (title, deskripsi, image) VALUES (?, ?, ?)',
+    [req.body.itemName, req.body.itemDesc, req.body.itemImg],
     (error, results) => {
-      res.redirect('/index');
+      res.redirect('/');
+    }
+  );
+});
+
+app.post('/create_user', (req, res) => {
+  connection.query(
+    'INSERT INTO user (name, email) VALUES (?, ?)',
+    [req.body.itemUser, req.body.itemEmail],
+    (error, results) => {
+      res.redirect('/');
     }
   );
 });
 
 app.post('/delete/:id', (req, res) => {
   connection.query(
-    'DELETE FROM items WHERE id = ?',
+    'DELETE FROM news WHERE id = ?',
     [req.params.id],
     (error, results) => {
-      res.redirect('/index');
+      res.redirect('/');
     }
   );
 });
 
 app.get('/edit/:id', (req, res) => {
   connection.query(
-    'SELECT * FROM items WHERE id = ?',
+    'SELECT * FROM news WHERE id = ?',
     [req.params.id],
     (error, results) => {
       res.render('edit.ejs', {item: results[0]});
@@ -61,9 +80,9 @@ app.get('/edit/:id', (req, res) => {
 
 app.post('/update/:id', (req, res) => {
   // Ketik code untuk memperbarui item yang dipilih
-  connection.query('UPDATE items SET name = ? WHERE id = ?',[req.body.itemName, req.params.id],
+  connection.query('UPDATE news SET title = ?, deskripsi = ?, image = ? WHERE id = ?',[req.body.itemName, req.body.itemDesc, req.body.itemImg, req.params.id],
   (error, results)=>{
-    res.redirect('/index');
+    res.redirect('/');
   })
   // Hapus code pengalihan ke halaman daftar
 });
